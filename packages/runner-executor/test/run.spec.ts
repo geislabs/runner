@@ -17,7 +17,7 @@ describe('run', () => {
                             yield (value as number) * 2
                         }
                     },
-                })
+                }).output
             )
         ).resolves.toStrictEqual([2, 4, 6])
     })

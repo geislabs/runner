@@ -1,8 +1,10 @@
 import { Plugin } from '@geislabs/runner-plugin'
 import { Context } from './context/contextTypes'
 import { Sink } from './sink'
+import { Source } from './source'
 
 export interface SimpleConfig<TValue, TPlugin extends Plugin> {
+    source: Source<TValue>
     input: (context: Context<TPlugin>) => Generator<TValue>
     output: Sink<TValue>
     plugins: Array<TPlugin | TPlugin>

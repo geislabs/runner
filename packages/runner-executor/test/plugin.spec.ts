@@ -10,7 +10,7 @@ describe('plugins', () => {
                     input: function* ({ values }) {
                         yield* values()
                     },
-                })
+                }).output
             )
         ).resolves.toStrictEqual([1, 2, 3])
     })
@@ -24,7 +24,7 @@ describe('plugins', () => {
                     input: function* ({ values }) {
                         yield* values()
                     },
-                })
+                }).output
             )
         ).resolves.toStrictEqual([1, 2, 3])
     })
