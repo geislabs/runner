@@ -1,4 +1,5 @@
 {
+    "private": false,
     "name": "@geislabs/runner-config",
     "version": "0.0.7",
     "description": "> TODO: description",

@@ -1,5 +1,5 @@
 {
-    "name": "@geislabs/runner",
+    "name": "@geislabs/runner-executor",
     "version": "0.0.7",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
@@ -23,10 +23,8 @@
         "build": "tsc",
         "watch": "tsc --watch"
     },
-    "dependencies": {
-        "@geislabs/runner-config": "0.0.7",
-        "@geislabs/runner-executor": "0.0.7",
-        "@geislabs/geis": "0.0.45",
-        "@geislabs/geis-puppeteer": "0.0.45"
+    "dependencies": {},
+    "devDependencies": {
+        "@geislabs/runner-config": "0.0.7"
     }
 }
