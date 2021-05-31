@@ -1,3 +1,3 @@
 export type Sink<TValue, TOut = TValue> = (
-    input: AsyncIterable<unknown> | Iterable<unknown>
+    input: AsyncIterable<TValue>
 ) => AsyncGenerator<TOut>

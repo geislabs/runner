@@ -1,14 +1,20 @@
-import { Config, Plugin } from '@geislabs/runner-config'
+import { from } from 'ix/asynciterable'
+import {
+    Config,
+    Plugin,
+    CreateConfigAttrs,
+    config as getConfig,
+} from '@geislabs/runner-config'
 import { buildContext } from './context/contextFactory'
 
 export async function* run<TValue, TPlugin extends Plugin>(
-    config: Config<TValue, TPlugin>
+    config: CreateConfigAttrs<TValue, TPlugin>
 ) {
-    const context = await buildContext(config.plugins)
+    const resolved = getConfig(config)
+    const context = await buildContext(resolved.plugins)
     try {
-        const source = config.input(context)
-        const iterator = source[Symbol.iterator]()
-        yield* config.output(iterator)
+        const source = from(config.input(context))
+        yield* resolved.output(source)
     } finally {
         await context.dispose()
     }
