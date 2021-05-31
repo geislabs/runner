@@ -12,8 +12,8 @@
         "test:e2e": "jest \"packages/geis-e2e\"",
         "test:browse": "jest \"packages/geis-browse\"",
         "watch": "jest --watch",
-        "watch:json": "jest \"packages/geis-json\" --watch",
-        "watch:browse": "jest \"packages/geis-browse\" --watch",
+        "watch:executor": "jest \"packages/geis-executor\" --watch",
+        "watch:config": "jest \"packages/geis-config\" --watch",
         "prepare": "husky install"
     },
     "devDependencies": {
@@ -25,6 +25,7 @@
         "file-url": "^4.0.0",
         "husky": "^6.0.0",
         "inversify": "^5.1.1",
+        "ix": "^4.3.1",
         "jest": "^26.6.3",
         "jsonpath": "^1.1.1",
         "lerna": "^4.0.0",

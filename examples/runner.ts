@@ -5,18 +5,21 @@
  * This sample code illustrates how to scrape the results of a webpage
  */
 
-import { run, config } from '..' // const config = require('@geislabs/geis')
-import { browse } from '@geislabs/geis'
+import { config } from '..' // const config = require('@geislabs/geis')
+import browser from './browse'
+import fetcher from './fetch'
 
 export default config({
-    input: function* () {
+    plugins: [browser(), browser(), browser(), fetcher()],
+    input: function* ({ browse }) {
         const session = browse('https://github.com/geislabs/geis')
-        yield {
-            author1: session['span.author'].toString(),
-            author2: session['span.author'].toString(),
-            author3: session['span.author'].toString(),
-            author4: session['span.author'].toString(),
+        for (const item of session['.Post']) {
+            yield {
+                author1: item['span.author'].toString(),
+                author2: item['span.author'].toString(),
+                author3: item['span.author'].toString(),
+                author4: item['span.author'].toString(),
+            }
         }
     },
-    output: console.log,
 })
