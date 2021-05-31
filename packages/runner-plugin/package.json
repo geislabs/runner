@@ -1,6 +1,6 @@
 {
     "private": false,
-    "name": "@geislabs/runner-config",
+    "name": "@geislabs/runner-plugin",
     "version": "0.0.7",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
@@ -24,7 +24,5 @@
         "build": "tsc",
         "watch": "tsc --watch"
     },
-    "dependencies": {
-        "@geislabs/runner-plugin": "0.0.7"
-    }
+    "dependencies": {}
 }

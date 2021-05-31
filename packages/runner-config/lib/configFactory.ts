@@ -1,6 +1,6 @@
+import { Plugin } from '@geislabs/runner-plugin'
 import { CreateConfigAttrs } from './configAttrs'
 import { Config } from './configTypes'
-import { Plugin } from './plugin'
 
 export function buildConfig<TValue, TPlugin extends Plugin>({
     plugins = [],

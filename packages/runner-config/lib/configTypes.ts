@@ -1,5 +1,5 @@
+import { Plugin } from '@geislabs/runner-plugin'
 import { Context } from './context/contextTypes'
-import { Plugin } from './plugin/pluginTypes'
 import { Sink } from './sink'
 
 export interface SimpleConfig<TValue, TPlugin extends Plugin> {

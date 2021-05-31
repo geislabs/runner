@@ -1,5 +1,5 @@
+import { Plugin } from '@geislabs/runner-plugin'
 import { Config } from './configTypes'
-import { Plugin } from './plugin/pluginTypes'
 
 export interface CreateConfigAttrs<TValue, TPlugin extends Plugin>
     extends Pick<Config<TValue, TPlugin>, 'input'>,

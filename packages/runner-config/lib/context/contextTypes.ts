@@ -1,4 +1,4 @@
-import { Plugin } from '../plugin/pluginTypes'
+import { Plugin } from '@geislabs/runner-plugin'
 
 export type GetExports<TPlugin extends Plugin> = UnionToIntersection<
     TPlugin['init'] extends () => Promise<infer U>

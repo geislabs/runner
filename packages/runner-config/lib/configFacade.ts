@@ -1,6 +1,6 @@
+import { Plugin } from '@geislabs/runner-plugin'
 import { CreateConfigAttrs } from './configAttrs'
 import { buildConfig } from './configFactory'
-import { Plugin } from './plugin/pluginTypes'
 
 /**
  * Create a new config
