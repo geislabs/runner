@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "name": "@geislabs/runner-e2e",
+    "version": "0.0.7",
+    "description": "> TODO: description",
+    "author": "mads hargreave <mads.hargreave@gmail.com>",
+    "homepage": "",
+    "repository": "git://github.com/geislabs/geis.git",
+    "license": "ISC",
+    "scripts": {},
+    "dependencies": {
+        "@geislabs/runner": "^0.0.7"
+    }
+}

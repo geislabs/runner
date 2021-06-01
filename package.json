@@ -8,12 +8,12 @@
         "build": "lerna run build --stream",
         "start": "lerna run start --stream",
         "test": "jest",
-        "test:unit": "jest --testPathIgnorePatterns packages/geis-e2e",
-        "test:e2e": "jest \"packages/geis-e2e\"",
-        "test:browse": "jest \"packages/geis-browse\"",
+        "test:unit": "jest --testPathIgnorePatterns packages/runner-e2e",
+        "test:e2e": "jest \"packages/runner-e2e\"",
         "watch": "jest --watch",
-        "watch:executor": "jest \"packages/geis-executor\" --watch",
-        "watch:config": "jest \"packages/geis-config\" --watch",
+        "watch:executor": "jest \"packages/runner-executor\" --watch",
+        "watch:config": "jest \"packages/runner-config\" --watch",
+        "watch:worker": "jest \"packages/runner-worker\" --watch",
         "prepare": "husky install"
     },
     "devDependencies": {

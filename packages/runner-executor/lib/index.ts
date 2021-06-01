@@ -1,1 +1,2 @@
-export * from './executorFacade'
+export * from './executorProvider'
+export * from './executorTypes'

@@ -5,12 +5,13 @@
  * This sample code illustrates how to scrape the results of a webpage
  */
 
-import { config } from '..' // const config = require('@geislabs/geis')
+import { run } from '..' // const config = require('@geislabs/geis')
 import browser from './browse'
 import fetcher from './fetch'
 
-export default config({
+export default run({
     plugins: [browser(), browser(), browser(), fetcher()],
+    output: File('json://stuff.json'),
     input: function* ({ browse }) {
         const session = browse('https://github.com/geislabs/geis')
         for (const item of session['.Post']) {

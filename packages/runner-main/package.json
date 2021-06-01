@@ -27,6 +27,7 @@
         "@geislabs/runner-config": "0.0.7",
         "@geislabs/runner-executor": "0.0.7",
         "@geislabs/runner-plugin": "0.0.7",
+        "@geislabs/runner-worker": "0.0.7",
         "@geislabs/geis": "0.0.45",
         "@geislabs/geis-puppeteer": "0.0.45"
     }

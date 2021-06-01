@@ -1,12 +1,12 @@
 import { toArray } from 'ix/asynciterable'
-import { run } from '../lib'
+import { config } from '../lib'
 
 describe('run', () => {
     test('simple', async () => {
+        const run = config()
         await expect(
             toArray(
                 run({
-                    plugins: [],
                     input: function* () {
                         yield 1
                         yield 2
@@ -17,7 +17,7 @@ describe('run', () => {
                             yield (value as number) * 2
                         }
                     },
-                }).output
+                })
             )
         ).resolves.toStrictEqual([2, 4, 6])
     })
