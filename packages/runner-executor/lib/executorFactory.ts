@@ -23,7 +23,7 @@ export function buildExecutor<TPlugin extends Plugin>({
                     try {
                         yield* instance.output(mapped)
                     } finally {
-                        await context.dispose()
+                        await context.dispose?.()
                     }
                 }
             },
