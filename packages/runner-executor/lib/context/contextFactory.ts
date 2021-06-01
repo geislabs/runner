@@ -1,4 +1,5 @@
-import { Context, Plugin, GetExports } from '@geislabs/runner-config'
+import { Plugin } from '@geislabs/runner-plugin'
+import { Context, GetExports } from '@geislabs/runner-worker'
 
 export async function buildContext<TPlugin extends Plugin>(
     plugins: TPlugin[]

@@ -8,8 +8,6 @@ export type GetExports<TPlugin extends Plugin> = UnionToIntersection<
         : never
 >
 
-type Test = GetExports<Plugin<{}>>
-
 export type Context<TPlugin extends Plugin> = GetExports<TPlugin> & {
     dispose?: () => Promise<null>
 }

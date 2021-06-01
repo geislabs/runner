@@ -1,5 +1,7 @@
 import { toArray } from 'ix/asynciterable'
-import { Worker, run } from '@geislabs/runner'
+import { Worker, config } from '@geislabs/runner'
+
+const run = config()
 
 const processor: Worker<number> = function* () {
     yield 1

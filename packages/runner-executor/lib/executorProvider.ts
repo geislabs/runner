@@ -1,4 +1,4 @@
-import { Plugin } from '@geislabs/runner-config'
+import { Plugin } from '@geislabs/runner-plugin'
 import { CreateExecutorAttrs } from './executorAttrs'
 import { buildExecutor } from './executorFactory'
 import { Executor } from './executorTypes'

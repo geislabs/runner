@@ -1,6 +1,8 @@
-import { config } from '@geislabs/runner-executor'
-export { Plugin, Context } from '@geislabs/runner-config'
+export { Plugin } from '@geislabs/runner-plugin'
 export { config, Executor } from '@geislabs/runner-executor'
-export { AnyWorkerConfig as Worker } from '@geislabs/runner-worker'
-
-export const run = config()
+export {
+    AnyWorkerConfig as Worker,
+    Context,
+    Sink,
+    Source,
+} from '@geislabs/runner-worker'

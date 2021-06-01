@@ -1,3 +1,6 @@
 export { create as worker } from './workerFacade'
 export * from './workerTypes'
 export * from './api/apiAttrs'
+export * from './context'
+export * from './sink'
+export * from './source'
