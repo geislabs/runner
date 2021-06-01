@@ -24,8 +24,6 @@
         "watch": "tsc --watch"
     },
     "dependencies": {
-        "@geislabs/geis": "0.0.45",
-        "@geislabs/geis-puppeteer": "0.0.45",
         "@geislabs/runner-config": "^0.0.2",
         "@geislabs/runner-executor": "^0.0.2",
         "@geislabs/runner-plugin": "^0.0.2",
