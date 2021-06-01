@@ -1,6 +1,6 @@
 {
     "name": "@geislabs/runner",
-    "version": "0.0.7",
+    "version": "0.0.1",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
     "homepage": "",
@@ -24,11 +24,11 @@
         "watch": "tsc --watch"
     },
     "dependencies": {
-        "@geislabs/runner-config": "0.0.7",
-        "@geislabs/runner-executor": "0.0.7",
-        "@geislabs/runner-plugin": "0.0.7",
-        "@geislabs/runner-worker": "0.0.7",
         "@geislabs/geis": "0.0.45",
-        "@geislabs/geis-puppeteer": "0.0.45"
+        "@geislabs/geis-puppeteer": "0.0.45",
+        "@geislabs/runner-config": "^0.0.1",
+        "@geislabs/runner-executor": "^0.0.1",
+        "@geislabs/runner-plugin": "^0.0.1",
+        "@geislabs/runner-worker": "^0.0.1"
     }
 }
