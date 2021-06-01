@@ -7,6 +7,7 @@
         "dev": "lerna run watch --stream --parallel",
         "build": "lerna run build --stream",
         "start": "lerna run start --stream",
+        "release:patch": "git add -A && git commit -am \"released\" --allow-empty && lerna version patch --yes --force-publish",
         "test": "jest",
         "test:unit": "jest --testPathIgnorePatterns packages/runner-e2e",
         "test:e2e": "jest \"packages/runner-e2e\"",
