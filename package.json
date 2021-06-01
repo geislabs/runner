@@ -7,15 +7,16 @@
         "dev": "lerna run watch --stream --parallel",
         "build": "lerna run build --stream",
         "start": "lerna run start --stream",
+        "prepare": "husky install",
         "release:patch": "git add -A && git commit -am \"released\" --allow-empty && lerna version patch --yes --force-publish",
+        "test:coverage": "jest --collect-coverage",
         "test": "jest",
         "test:unit": "jest --testPathIgnorePatterns packages/runner-e2e",
         "test:e2e": "jest \"packages/runner-e2e\"",
         "watch": "jest --watch",
         "watch:executor": "jest \"packages/runner-executor\" --watch",
         "watch:config": "jest \"packages/runner-config\" --watch",
-        "watch:worker": "jest \"packages/runner-worker\" --watch",
-        "prepare": "husky install"
+        "watch:worker": "jest \"packages/runner-worker\" --watch"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^19.0.0",
