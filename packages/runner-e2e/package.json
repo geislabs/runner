@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "@geislabs/runner-e2e",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
     "homepage": "",
@@ -9,6 +9,6 @@
     "license": "ISC",
     "scripts": {},
     "dependencies": {
-        "@geislabs/runner": "^0.0.11"
+        "@geislabs/runner": "^0.0.12"
     }
 }
