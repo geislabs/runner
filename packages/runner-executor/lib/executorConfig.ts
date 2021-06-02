@@ -1,5 +1,5 @@
-import { Plugin } from '@geislabs/runner-plugin'
+import { Plugin } from '@geislabs/runtime'
 
-export interface ExecutorConfig<TPlugin extends Plugin> {
+export interface ExecutorConfig<TPlugin extends Plugin<any>> {
     plugins?: TPlugin[]
 }

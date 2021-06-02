@@ -24,7 +24,7 @@
         "watch": "tsc --watch"
     },
     "devDependencies": {
-        "@geislabs/runtime": "^0.0.69",
+        "@geislabs/runtime": "^0.0.70",
         "@geislabs/runner-plugin": "^0.0.15",
         "@geislabs/runner-worker": "^0.0.15"
     }

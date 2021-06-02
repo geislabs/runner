@@ -1,5 +1,4 @@
-import { Plugin } from '@geislabs/runner-plugin'
-import { Context } from '@geislabs/runner-worker'
+import { Context, Plugin } from '@geislabs/runtime'
 import { Execution } from './execution/executionTypes'
 
 export interface Runner<TContext = unknown> {
@@ -16,17 +15,17 @@ export interface Runner<TContext = unknown> {
     ): Execution<TValue>
 }
 
-export interface IExecutor<TPlugin extends Plugin> {
+export interface IExecutor<TPlugin extends Plugin<any>> {
     /**
      * Stuff
      */
-    run: Runner<Context<TPlugin>>
+    run: Runner<Context<TPlugin, any>>
     /**
      * Watch
      */
     watch: <TValue>(
         source: Iterable<TValue>,
-        callback: RunIteratorCallackFn<TValue, Context<TPlugin>>
+        callback: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ) => Execution<TValue>
 }
 

@@ -1,5 +1,4 @@
-import { Plugin } from '@geislabs/runner-plugin'
-import { Context, worker } from '@geislabs/runner-worker'
+import { config as createRuntime, Plugin, Context } from '@geislabs/runtime'
 import { buildContext } from './context/contextFactory'
 import { Execution } from './execution/executionTypes'
 import { ExecutorConfig } from './executorConfig'
@@ -14,7 +13,9 @@ function getIterator<TValue>(
     )
 }
 
-export class Executor<TPlugin extends Plugin> implements IExecutor<TPlugin> {
+export class Executor<TPlugin extends Plugin<any>>
+    implements IExecutor<TPlugin>
+{
     #config: ExecutorConfig<TPlugin>
 
     constructor(config: ExecutorConfig<TPlugin>) {
@@ -22,22 +23,23 @@ export class Executor<TPlugin extends Plugin> implements IExecutor<TPlugin> {
     }
 
     run<TValue>(
-        callback: RunCallackFn<TValue, Context<TPlugin>>
+        callback: RunCallackFn<TValue, Context<TPlugin, any>>
     ): Execution<TValue>
     run<TValue>(
         source: Iterable<TValue>,
-        callback: RunIteratorCallackFn<TValue, Context<TPlugin>>
+        callback: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ): Execution<TValue>
     run<TValue>(
-        arg1: Iterable<TValue> | RunCallackFn<TValue, Context<TPlugin>>,
-        arg2?: RunIteratorCallackFn<TValue, Context<TPlugin>>
+        arg1: Iterable<TValue> | RunCallackFn<TValue, Context<TPlugin, any>>,
+        arg2?: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ) {
+        const runtime = createRuntime({ plugins: this.#config.plugins })
         const self = this
         const generator = async function* () {
             let index = 0
 
             if (!arg2 && typeof arg1 === 'function') {
-                const context = await buildContext(self.#config.plugins ?? [])
+                const context = await runtime.load()
                 const callback = arg1
                 const mapped = callback(context)
                 try {
@@ -48,15 +50,13 @@ export class Executor<TPlugin extends Plugin> implements IExecutor<TPlugin> {
                         yield mapped
                     }
                 } finally {
-                    await context.dispose?.()
+                    // await context._dispose?.()
                 }
             } else {
                 const source = arg1 as Iterable<TValue>
                 const callback = arg2 as RunIteratorCallackFn<TValue>
                 for await (const value of source) {
-                    const context = await buildContext(
-                        self.#config.plugins ?? []
-                    )
+                    const context = await runtime.load()
                     const mapped = callback(value, index++, context)
                     try {
                         const iterator = getIterator(mapped)
@@ -66,7 +66,7 @@ export class Executor<TPlugin extends Plugin> implements IExecutor<TPlugin> {
                             yield mapped
                         }
                     } finally {
-                        await context.dispose?.()
+                        // await context.dispose?.()
                     }
                 }
             }
@@ -79,7 +79,7 @@ export class Executor<TPlugin extends Plugin> implements IExecutor<TPlugin> {
     }
     watch<TValue>(
         source: Iterable<TValue>,
-        callback: RunIteratorCallackFn<TValue, Context<TPlugin>>
+        callback: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ): Execution<TValue> {
         return {} as any
         //     const self = this
