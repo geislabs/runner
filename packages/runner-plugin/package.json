@@ -23,5 +23,6 @@
         "clean": "rimraf dist",
         "build": "tsc",
         "watch": "tsc --watch"
-    }
+    },
+    "dependencies": {}
 }

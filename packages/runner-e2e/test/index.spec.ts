@@ -1,7 +1,7 @@
 import { toArray } from 'ix/asynciterable'
 import { Worker, config } from '@geislabs/runner'
 
-const run = config()
+const { run } = config()
 
 const processor: Worker<number> = function* () {
     yield 1
@@ -9,7 +9,7 @@ const processor: Worker<number> = function* () {
     yield 3
 }
 
-describe('index', () => {
+describe.skip('index', () => {
     test('simple', async () => {
         const execution = run(processor)
         const actual = toArray(execution)

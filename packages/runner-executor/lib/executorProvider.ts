@@ -1,11 +1,15 @@
 import { Plugin } from '@geislabs/runner-plugin'
-import { CreateExecutorAttrs } from './executorAttrs'
-import { buildExecutor } from './executorFactory'
-import { Executor } from './executorTypes'
+import { ExecutorConfig } from './executorConfig'
+import { Executor } from './executorFacade'
+import { IExecutor } from './executorTypes'
 
 export function config<TPlugin extends Plugin>(
-    config: CreateExecutorAttrs<TPlugin> = {}
-): Executor<TPlugin> {
-    const executor = buildExecutor(config)
-    return executor
+    config: ExecutorConfig<TPlugin> = {}
+): IExecutor<TPlugin> {
+    const executor = new Executor<TPlugin>(config)
+    return {
+        // @ts-expect-error
+        run: executor.run.bind(executor),
+        watch: executor.watch.bind(executor),
+    }
 }
