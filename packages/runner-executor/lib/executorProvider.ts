@@ -8,7 +8,6 @@ export function config<TPlugin extends Plugin>(
 ): IExecutor<TPlugin> {
     const executor = new Executor<TPlugin>(config)
     return {
-        // @ts-expect-error
         run: executor.run.bind(executor),
         watch: executor.watch.bind(executor),
     }
