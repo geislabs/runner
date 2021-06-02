@@ -1,6 +1,6 @@
 {
     "name": "@geislabs/runner",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
     "homepage": "",
@@ -24,8 +24,8 @@
         "watch": "tsc --watch"
     },
     "dependencies": {
-        "@geislabs/runner-executor": "^0.0.13",
-        "@geislabs/runner-plugin": "^0.0.13",
-        "@geislabs/runner-worker": "^0.0.13"
+        "@geislabs/runner-executor": "^0.0.14",
+        "@geislabs/runner-plugin": "^0.0.14",
+        "@geislabs/runner-worker": "^0.0.14"
     }
 }
