@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@geislabs/runner-executor": "^0.0.22",
+        "@geislabs/runner-topology": "^0.0.22",
         "@geislabs/runner-plugin": "^0.0.22",
         "@geislabs/runner-worker": "^0.0.22"
     }
