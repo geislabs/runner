@@ -2,7 +2,7 @@ import { toArray } from 'ix/asynciterable'
 import { config } from '../lib'
 import { http } from './support'
 
-describe('plugins', () => {
+describe.skip('plugins', () => {
     test('simple', async () => {
         const { run } = config({
             plugins: [http],

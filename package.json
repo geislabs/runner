@@ -16,6 +16,8 @@
         "watch": "jest --watch",
         "watch:executor": "jest \"packages/runner-executor\" --watch",
         "watch:config": "jest \"packages/runner-config\" --watch",
+        "watch:topology": "jest \"packages/runner-topology\" --watch",
+        "watch:pipe": "jest \"packages/runner-pipe\" --watch",
         "watch:worker": "jest \"packages/runner-worker\" --watch"
     },
     "devDependencies": {

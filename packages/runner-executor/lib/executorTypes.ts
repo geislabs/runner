@@ -1,3 +1,4 @@
+import * as topology from '@geislabs/runner-topology'
 import { Context, Plugin } from '@geislabs/runtime'
 import { Execution } from './execution/executionTypes'
 
@@ -5,14 +6,34 @@ export interface Runner<TContext = unknown> {
     /**
      * Run
      */
-    <TValue>(callback: RunCallackFn<TValue, TContext>): Execution<TValue>
+    <TValue>(
+        callback: topology.AnyCreateSourceAttrs<TValue, TContext>
+    ): Execution<TValue>
     /**
      * Partition input source
      */
     <TValue>(
-        source: Iterable<TValue>,
+        source: topology.AnyCreateSourceAttrs<TValue, TContext>,
         callback: RunIteratorCallackFn<TValue, TContext>
     ): Execution<TValue>
+}
+
+export interface Pipe<TContext = unknown> {
+    <T1, T2>(
+        source1: topology.AnyCreateSourceAttrs<T1, TContext>,
+        worker: topology.AnyCreateWorkerAttrs<T1, T2, TContext>
+    ): AsyncIterable<T2>
+    <T1, T2, T3>(
+        source1: topology.AnyCreateSourceAttrs<T1, TContext>,
+        worker1: topology.AnyCreateWorkerAttrs<T1, T2, TContext>,
+        worker2: topology.AnyCreateWorkerAttrs<T2, T3, TContext>
+    ): AsyncIterable<T3>
+    <T1, T2, T3, T4>(
+        source1: topology.AnyCreateSourceAttrs<T1, TContext>,
+        worker1: topology.AnyCreateWorkerAttrs<T1, T2, TContext>,
+        worker2: topology.AnyCreateWorkerAttrs<T2, T3, TContext>,
+        worker3: topology.AnyCreateWorkerAttrs<T3, T4, TContext>
+    ): AsyncIterable<T4>
 }
 
 export interface IExecutor<TPlugin extends Plugin<any>> {
@@ -27,6 +48,10 @@ export interface IExecutor<TPlugin extends Plugin<any>> {
         source: Iterable<TValue>,
         callback: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ) => Execution<TValue>
+    /**
+     * Pipe
+     */
+    pipe: Pipe<Context<TPlugin, any>>
 }
 
 export type RunCallbackSyncFn<TValue, TContext> = (context: TContext) => TValue

@@ -1,8 +1,11 @@
 import { config as createRuntime, Plugin, Context } from '@geislabs/runtime'
-import { buildContext } from './context/contextFactory'
+import * as topology from '@geislabs/runner-topology'
+import { from } from 'ix/asynciterable'
+import { flatMap, tap } from 'ix/asynciterable/operators'
 import { Execution } from './execution/executionTypes'
 import { ExecutorConfig } from './executorConfig'
 import { IExecutor, RunCallackFn, RunIteratorCallackFn } from './executorTypes'
+import { source, worker } from '@geislabs/runner-topology'
 
 function getIterator<TValue>(
     result: ReturnType<RunIteratorCallackFn<TValue>>
@@ -22,8 +25,28 @@ export class Executor<TPlugin extends Plugin<any>>
         this.#config = config
     }
 
+    pipe(
+        source1: topology.AnyCreateSourceAttrs<any, Context<TPlugin, any>>,
+        ...workers: topology.AnyCreateWorkerAttrs<any, any, any>[]
+    ) {
+        const self = this
+        const generator = async function* () {
+            const runtime = createRuntime({ plugins: self.#config.plugins })
+            const context = await runtime.load()
+            const source = topology.source(source1)
+            yield* from(source.fn(context)).pipe(
+                ...workers.map((worker) =>
+                    flatMap((value, index) =>
+                        topology.worker(worker).fn(value, index, context)
+                    )
+                )
+            )
+        }
+        return generator()
+    }
+
     run<TValue>(
-        callback: RunCallackFn<TValue, Context<TPlugin, any>>
+        callback: topology.AnyCreateSourceAttrs<any, Context<TPlugin, any>>
     ): Execution<TValue>
     run<TValue>(
         source: Iterable<TValue>,
@@ -33,48 +56,29 @@ export class Executor<TPlugin extends Plugin<any>>
         arg1: Iterable<TValue> | RunCallackFn<TValue, Context<TPlugin, any>>,
         arg2?: RunIteratorCallackFn<TValue, Context<TPlugin, any>>
     ) {
-        const runtime = createRuntime({ plugins: this.#config.plugins })
         const self = this
         const generator = async function* () {
-            let index = 0
-
-            if (!arg2 && typeof arg1 === 'function') {
-                const context = await runtime.load()
-                const callback = arg1
-                const mapped = callback(context)
-                try {
-                    const iterator = getIterator(mapped)
-                    if (iterator) {
-                        yield* iterator
-                    } else {
-                        yield mapped
-                    }
-                } finally {
-                    // await context._dispose?.()
-                }
+            if (!arg2) {
+                yield* self.pipe(
+                    source<TValue, Context<TPlugin, any>>(
+                        // @ts-expect-error
+                        arg1
+                    )
+                )
             } else {
-                const source = arg1 as Iterable<TValue>
-                const callback = arg2 as RunIteratorCallackFn<TValue>
-                for await (const value of source) {
-                    const context = await runtime.load()
-                    const mapped = callback(value, index++, context)
-                    try {
-                        const iterator = getIterator(mapped)
-                        if (iterator) {
-                            yield* iterator
-                        } else {
-                            yield mapped
-                        }
-                    } finally {
-                        // await context.dispose?.()
-                    }
-                }
+                yield* self.pipe(
+                    source<TValue, Context<TPlugin, any>>(
+                        // @ts-expect-error
+                        arg1
+                    ),
+                    // @ts-expect-error
+                    worker<TValue, Context<TPlugin, any>>(arg2)
+                )
             }
         }
         const context = {
             stats: () => ({ count: 0, elapsedMs: 0 }),
         }
-
         return Object.assign(generator(), context)
     }
     watch<TValue>(

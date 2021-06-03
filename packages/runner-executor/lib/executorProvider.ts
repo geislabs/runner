@@ -10,5 +10,6 @@ export function config<TPlugin extends Plugin<any>>(
     return {
         run: executor.run.bind(executor),
         watch: executor.watch.bind(executor),
+        pipe: executor.pipe.bind(executor),
     }
 }
