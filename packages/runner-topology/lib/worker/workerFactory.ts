@@ -9,7 +9,9 @@ export function worker<TIn, TOut = TIn, TContext = unknown>(
         return config
     }
     return {
+        // @ts-expect-error
         fn: async function* (value, index, context) {
+            // @ts-expect-error
             const created = config(value, index, context)
             yield* from(created)
         },

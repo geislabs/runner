@@ -17,7 +17,9 @@ export function source<TValue, TContext>(
         return config
     }
     return {
+        // @ts-expect-error
         fn: async function* (context) {
+            // @ts-expect-error
             const created = config(context)
             yield* from(created)
         },
