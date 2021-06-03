@@ -1,6 +1,6 @@
 {
     "name": "@geislabs/runner-executor",
-    "version": "0.0.21",
+    "version": "0.0.22",
     "description": "> TODO: description",
     "author": "mads hargreave <mads.hargreave@gmail.com>",
     "homepage": "",
@@ -24,9 +24,9 @@
         "watch": "tsc --watch"
     },
     "devDependencies": {
-        "@geislabs/runner-plugin": "^0.0.21",
-        "@geislabs/runner-topology": "^0.0.21",
-        "@geislabs/runner-worker": "^0.0.21",
+        "@geislabs/runner-plugin": "^0.0.22",
+        "@geislabs/runner-topology": "^0.0.22",
+        "@geislabs/runner-worker": "^0.0.22",
         "@geislabs/runtime": "^0.0.70"
     }
 }
