@@ -30,11 +30,21 @@ export interface IExecutor<TPlugin extends Plugin<any>> {
 }
 
 export type RunCallbackSyncFn<TValue, TContext> = (context: TContext) => TValue
+export type RunCallbackAsyncFn<TValue, TContext> = (
+    context: TContext
+) => Promise<TValue>
+export type RunCallbackGeneratorFn<TValue, TContext> = (
+    context: TContext
+) => Generator<TValue>
+export type RunCallbackAsyncGeneratorFn<TValue, TContext> = (
+    context: TContext
+) => AsyncGenerator<TValue>
 
-export type RunCallackFn<TValue, TContext = unknown> = RunCallbackSyncFn<
-    TValue,
-    TContext
->
+export type RunCallackFn<TValue, TContext = unknown> =
+    | RunCallbackSyncFn<TValue, TContext>
+    | RunCallbackAsyncFn<TValue, TContext>
+    | RunCallbackGeneratorFn<TValue, TContext>
+    | RunCallbackAsyncGeneratorFn<TValue, TContext>
 
 export type RunIteratorCallbackSyncFn<TValue, TContext> = (
     value: TValue,
